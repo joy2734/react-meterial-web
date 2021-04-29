@@ -4,19 +4,25 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
-  entry: {
-    app: './src/index.js'
+  resolve:{
+    alias:{
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
+  entry: [
+    'react-hot-loader/patch',
+    './src/index.js'
+  ],
   output: {
-    path: __dirname + '/dist/',
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js'
+    path: __dirname + '/dist',
+    filename: 'main.js'
   },
   devServer: {
     hot: true,
-    inline: false,
+    inline: true,
     port: 3000,
-    contentBase: __dirname + '/dist/'
+    publicPath: '/'
+    //contentBase: __dirname + '/dist/'
   },
   module: {
         rules: [
@@ -59,8 +65,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      filename: "index.html"
+      inject: 'body',
+      template: path.resolve(__dirname, './src/index.html'),
+      filename: path.resolve(__dirname, './dist/index.html')
     }),
     new webpack.HotModuleReplacementPlugin()
   ]

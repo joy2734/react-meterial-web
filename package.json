@@ -1,0 +1,19 @@
+{
+  "name": "react-meterial-web",
+  "version": "1.0.0",
+  "description": "meterial web example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joy2734/react-meterial-web.git"
+  },
+  "author": "hjjoo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joy2734/react-meterial-web/issues"
+  },
+  "homepage": "https://github.com/joy2734/react-meterial-web#readme"
+}

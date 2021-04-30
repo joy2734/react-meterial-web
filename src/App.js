@@ -1,166 +1,134 @@
 
 import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
+// import clsx from 'clsx';
+import { makeStyles, useTheme, fade } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
+import IconButton from '@material-ui/core/IconButton';
+import PersonIcon from '@material-ui/icons/Person';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import SvgIcon from '@material-ui/core/SvgIcon';
+// import Drawer from '@material-ui/core/Drawer';
+// import List from '@material-ui/core/List';
+// import Divider from '@material-ui/core/Divider';
+// import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+// import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemIcon from '@material-ui/core/ListItemIcon';
+// import ListItemText from '@material-ui/core/ListItemText';
+import SearchIcon from '@material-ui/icons/Search';
+// import InboxIcon from '@material-ui/icons/MoveToInbox';
+// import MailIcon from '@material-ui/icons/Mail';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
+// import Badge from '@material-ui/core/Badge';  
+import InputBase from '@material-ui/core/InputBase';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import { hot } from 'react-hot-loader/root';
 
-
-const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
+  root:{
+    backgroundColor: '#eee',
+    color: '#3c4858'
   },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
+  content:{
+    backgroundColor: 'blue'
   },
   toolbar: {
+    backgroundColor: 'green'
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton:{
+    marginRight: theme.spacing(2),
+    boxShadow:'0 14px 26px -12px rgb(153 153 153 / 42%), 0 4px 23px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(153 153 153 / 20%)'
+  },
+  title: {
+    flexGrow: 1
+  },
+  appbar:{
+    backgroundColor: 'transparent',
+    color: '#555555'
+  },
+  search:{
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius
+  },
+  activeButton:{
+
+  },
+  search:{
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover':{
+      backgroundColor: fade(theme.palette.common.white, 0.25)
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]:{
+      marginLeft: theme.spacing(3),
+      width: 'auto'
+    },
+    borderBottom: '1px solid #c1c1c1'
+  },
+  searchIcon:{
+    padding: theme.spacing(0,2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
+    justifyContent: 'center'
+  }
 }));
 
 function App() {
   const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Mini variant drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
+      <div className={classes.grow}>
+        <AppBar position="static" className={classes.appbar}>
+            <Toolbar>
+                <IconButton edge="start" className={classes.menuButton} color="primary" aria-label="menu" size="small">
+                  <SvgIcon color="disabled">
+                    <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+                  </SvgIcon>
+                </IconButton>
+                <Typography className={classes.title}>
+                  Dashboard
+                </Typography>
+                <div className={classes.search}>
+                  <InputBase
+                    placeholder="Search…"
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                    inputProps={{ 'aria-label': 'search' }}
+                  />
+                  <IconButton edge="end" className={classes.menuButton} aria-label="dashbord" size="small">
+                    <SearchIcon  />
+                  </IconButton>
+                </div>
+                <IconButton edge="end" className={classes.activeButton} aria-label="dashbord" size="small">
+                  <DashboardIcon />
+                </IconButton>
+                <IconButton edge="end" className={classes.activeButton} aria-label="notification" size="small">
+                  <NotificationsIcon />
+                </IconButton>
+                <IconButton edge="end" className={classes.activeButton} aria-label="person" size="small">
+                  <PersonIcon />
+                </IconButton>
+            </Toolbar>
+        </AppBar>
+      </div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>
@@ -192,32 +160,3 @@ function App() {
 }
 
 export default hot(App);
-
-
-
-
-
-
-
-
-
-
-
-// import CssBaseline from '@material-ui/core/CssBaseline';
-// import Typography from '@material-ui/core/Typography';
-// import Container from '@material-ui/core/Container';
-
-// class App extends React.Component {
-//     render(){
-//         return(
-//             <React.Fragment>
-//                 <CssBaseline />
-//                 <Container maxWidth="sm">
-//                   <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} />
-//                 </Container>
-//             </React.Fragment>
-//         )
-//     }
-// }
-
-// export default hot(App);

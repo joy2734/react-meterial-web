@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App'
+//import './scss/main.scss';
 import { setConfig  } from 'react-hot-loader';
 
 setConfig({/* 동작하지않고잇음 */
